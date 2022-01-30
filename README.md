@@ -59,6 +59,56 @@ ViewportHelper.onElementInViewport(element, function () {
 });
 ```
 
+### onElementNotInViewport()
+
+This method does the oposite of `onElementInViewport`, it executes a callback function when a given element is not in the viewport.
+
+#### Parameters:
+
+`element {HTMLElement}` : Target element, this is the element that will trigger the callback once it comes out of the viewport.
+
+`callback {function}` : Callback function to be called once the element comes out of the viewport.
+
+`offset {int|null} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
+
+`once {boolean}` : Only call the callback once if true, once the element comes out of the viewport the listener will be removed and the callback won't be triggered again - Useful for one time actions.
+
+#### Example usage:
+```javascript
+let element = document.querySelector('.some-element');
+
+ViewportHelper.onElementNotInViewport(element, function () {
+    console.log('Element .some-name is no longer in the viewport');
+});
+```
+
+### registerListener()
+
+This method is used to register custom listener functions on viewport change.
+
+#### Parameters:
+
+`element {HTMLElement}` : Target element.
+
+`callback {function}` : Callback function.
+
+`offset {int|null} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
+
+`once {boolean}` : Only call the callback once if true.
+
+`check {function}` : Listener function, is passed a listener object which contains the target element, offset etc... return true to trigger or return false to skip.
+
+#### Example usage:
+```javascript
+let element = document.querySelector('.some-element');
+
+ViewportHelper.registerListener(element, function () {
+    console.log('Custom listener function has been triggered > .some-element has come into the viewport');
+}, null, true, function (listener) {
+    return ViewportHelper.isElementInViewport(listener.element, listener.offset);
+});
+```
+
 ### onViewportChange()
 
 This method is used to execute a callback function when the viewport changes in any way, for example if the user scrolls, resizes their screen, or rotates their device.

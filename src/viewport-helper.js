@@ -49,7 +49,7 @@ const ViewportHelper = {
      * Check if a given element is in the viewport
      *
      * @param {HTMLElement} element
-     * @param offset
+     * @param {number|null} offset
      * @returns {boolean}
      */
     isElementInViewport: function (element, offset = null) {
@@ -87,17 +87,47 @@ const ViewportHelper = {
      * @param {HTMLElement} element
      * @param {function} callback
      * @param {boolean} once
-     * @param offset
+     * @param {number|null} offset
      */
     onElementInViewport: function (element, callback, offset = null, once = true) {
+        ViewportHelper.registerListener(element, callback, offset, once, function (listener) {
+            return ViewportHelper.isElementInViewport(listener.element, listener.offset);
+        });
+    },
 
-        var listenersLength = ViewportHelper.listeners.length;
+    /**
+     * Register listener for when a given element comes out of the viewport.
+     *
+     * @param {HTMLElement} element
+     * @param {function} callback
+     * @param {number|null} offset
+     * @param {boolean} once
+     */
+    onElementNotInViewport: function (element, callback, offset = null, once = true) {
+        ViewportHelper.registerListener(element, callback, offset, once, function (listener) {
+            return !ViewportHelper.isElementInViewport(listener.element, listener.offset);
+        });
+    },
+
+    /**
+     * Register listener function to be ran on viewport change.
+     *
+     * @param {HTMLElement} element
+     * @param {function} callback
+     * @param {number|null} offset
+     * @param {boolean} once
+     * @param {function} check
+     */
+    registerListener: function (element, callback, offset, once, check) {
+
+        var listenersLength = Object.entries(ViewportHelper.listeners).length;
 
         ViewportHelper.listeners[listenersLength + 1] = {
             element: element,
             callback: callback,
             once: once,
-            offset: offset
+            offset: offset,
+            check: check
         }
     },
 
@@ -107,13 +137,13 @@ const ViewportHelper = {
      */
     checkListeners: function () {
         for (const [listenerIndex, listener] of Object.entries(ViewportHelper.listeners)) {
-            if (ViewportHelper.isElementInViewport(listener.element, listener.offset)) {
+            if (listener.check(listener)) {
+
+                listener.callback();
 
                 if (listener.once) {
                     delete ViewportHelper.listeners[listenerIndex];
                 }
-
-                listener.callback();
             }
         }
     },

@@ -4,8 +4,6 @@
 
 viewport-helper.js is a set of useful tools for interacting with the viewport, mainly the ability to check if an element is in the viewport or not.
 
-If you are using JQuery you can find a compatible version of this package here.
-
 ## Installation
 
 This package can be installed using NPM:

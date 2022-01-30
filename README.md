@@ -8,7 +8,13 @@ If you are using JQuery you can find a compatible version of this package here.
 
 ## Installation
 
-`npm install @jacobfitzp/viewport-helper`
+This package can be installed using NPM:
+
+```
+npm install @jacobfitzp/viewport-helper
+```
+
+Alteratively you can download or clone this repo and include the source code manually.
 
 ## Usage
 
@@ -20,7 +26,7 @@ This method is used to check if a specific element is currently in the viewport.
 
 `element {HTMLElement}` : Target element, this is the element we will check is in the viewport.
 
-`offset {int} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
+`offset {int|null} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
 
 #### Example Usage:
 
@@ -42,8 +48,9 @@ This method is used to keep an eye on a given element and execute a callback fun
 
 `callback {function}` : Callback function to be called once the element comes into the viewport.
 
-`once {boolean}` : Only call the callback once if true, once the element comes into the viewport the listener will be removed and the callback won't be triggered again - Useful for one time actions such as image lazyloading.
+`offset {int|null} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
 
+`once {boolean}` : Only call the callback once if true, once the element comes into the viewport the listener will be removed and the callback won't be triggered again - Useful for one time actions such as image lazyloading.
 
 #### Example usage:
 ```javascript
@@ -51,7 +58,7 @@ let element = document.querySelector('.some-element');
 
 ViewportHelper.onElementInViewport(element, function () {
     console.log('Element .some-name has come into the viewport');
-}, true);
+});
 ```
 
 ### onViewportChange()

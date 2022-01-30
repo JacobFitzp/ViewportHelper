@@ -18,10 +18,17 @@ const ViewportHelper = {
      *
      * @returns {{top: number, bottom: number}}
      */
-    getViewportPosition: () => {
+    getViewportPosition: function (offset = null) {
+
+        var offsetAmount = ViewportHelper.config.viewportPositionOffset;
+
+        if (offset !== null) {
+            offsetAmount = offset;
+        }
+
         return {
-            top: (window.scrollY - ViewportHelper.config.viewportPositionOffset),
-            bottom: (window.scrollY + window.innerHeight + ViewportHelper.config.viewportPositionOffset)
+            top: (window.scrollY - offsetAmount),
+            bottom: (window.scrollY + window.innerHeight + offsetAmount)
         };
     },
 
@@ -31,9 +38,9 @@ const ViewportHelper = {
      * @param {HTMLElement} element
      * @returns {{top: number, bottom: number}}
      */
-    getElementPosition: (element) => {
+    getElementPosition: function (element) {
         return {
-            top: element.getBoundingClientRect().top,
+            top: element.getBoundingClientRect().top + window.scrollY,
             bottom: element.getBoundingClientRect().bottom
         };
     },
@@ -42,19 +49,20 @@ const ViewportHelper = {
      * Check if a given element is in the viewport
      *
      * @param {HTMLElement} element
+     * @param offset
      * @returns {boolean}
      */
-    isElementInViewport: (element) => {
+    isElementInViewport: function (element, offset = null) {
 
-        let viewportPosition = ViewportHelper.getViewportPosition(),
+        var viewportPosition = ViewportHelper.getViewportPosition(offset),
             elementPosition = ViewportHelper.getElementPosition(element);
 
         return (
             viewportPosition.top < elementPosition.top &&
             viewportPosition.bottom > elementPosition.top
         ) || (
-            viewportPosition.top > elementPosition.bottom &&
-            viewportPosition.bottom < elementPosition.bottom
+            viewportPosition.top < elementPosition.bottom &&
+            viewportPosition.bottom > elementPosition.bottom
         );
     },
 
@@ -63,7 +71,7 @@ const ViewportHelper = {
      *
      * @param {function} callback
      */
-    onViewportChange: (callback) => {
+    onViewportChange: function (callback) {
         ViewportHelper.config.viewportChangeEventTriggers.forEach((eventType) => {
             document.addEventListener(eventType, () => {
                 callback();
@@ -79,37 +87,51 @@ const ViewportHelper = {
      * @param {HTMLElement} element
      * @param {function} callback
      * @param {boolean} once
+     * @param offset
      */
-    onElementInViewport: (element, callback, once) => {
+    onElementInViewport: function (element, callback, offset = null, once = true) {
 
-        let listenersLength = ViewportHelper.listeners.length;
+        var listenersLength = ViewportHelper.listeners.length;
 
         ViewportHelper.listeners[listenersLength + 1] = {
             element: element,
             callback: callback,
-            once: once
+            once: once,
+            offset: offset
+        }
+    },
+
+    /**
+     * Check event listeners, should be run whenever the
+     * viewport changes.
+     */
+    checkListeners: function () {
+        for (const [listenerIndex, listener] of Object.entries(ViewportHelper.listeners)) {
+            if (ViewportHelper.isElementInViewport(listener.element, listener.offset)) {
+
+                if (listener.once) {
+                    delete ViewportHelper.listeners[listenerIndex];
+                }
+
+                listener.callback();
+            }
         }
     },
 
     /**
      * Initialise listeners
      */
-    init: () => {
+    init: function () {
+        ViewportHelper.checkListeners();
+
         ViewportHelper.onViewportChange(() => {
-            for (const [listenerIndex, listener] of Object.entries(ViewportHelper.listeners)) {
-                if (ViewportHelper.isElementInViewport(listener.element)) {
-
-                    if (listener.once) {
-                        ViewportHelper.listeners[listenerIndex] = undefined;
-                    }
-
-                    listener.callback();
-                }
-            }
+            ViewportHelper.checkListeners();
         });
     }
 }
 
-ViewportHelper.init();
+document.addEventListener('DOMContentLoaded', function () {
+    ViewportHelper.init();
+}, false);
 
-export default ViewportHelper;
+window.ViewportHelper = ViewportHelper;

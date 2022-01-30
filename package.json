@@ -1,11 +1,7 @@
 {
-  "name": "viewport-helper",
+  "name": "@jacobfitzp/viewport-helper",
   "version": "1.0.0",
   "description": "Set of useful tools for interacting with the viewport",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Jacob Fitzpatrick",
+  "author": "Jacob Fitzpatrick <contact@jacobfitzp.co.uk>",
   "license": "MIT"
 }

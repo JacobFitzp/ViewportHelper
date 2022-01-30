@@ -1,13 +1,26 @@
 #Viewport Helper
-`Version 1.0`
+
+![npm (scoped)](https://img.shields.io/npm/v/@jacobfitzp/viewport-helper)
 
 viewport-helper.js is a set of useful tools for interacting with the viewport, mainly the ability to check if an element is in the viewport or not.
+
+If you are using JQuery you can find a compatible version of this package here.
+
+## Installation
+
+`npm install @jacobfitzp/viewport-helper`
 
 ## Usage
 
 ### isElementInViewport()
 
 This method is used to check if a specific element is currently in the viewport.
+
+#### Parameters:
+
+`element {HTMLElement}` : Target element, this is the element we will check is in the viewport.
+
+`offset {int} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
 
 #### Example Usage:
 

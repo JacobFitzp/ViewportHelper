@@ -1,4 +1,4 @@
-#Viewport Helper
+<h1>Viewport Helper</h1>
 
 ![npm (scoped)](https://img.shields.io/npm/v/@jacobfitzp/viewport-helper)
 

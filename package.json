@@ -1,6 +1,6 @@
 {
   "name": "@jacobfitzp/viewport-helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Set of useful tools for interacting with the viewport",
   "author": "Jacob Fitzpatrick <contact@jacobfitzp.co.uk>",
   "license": "MIT"

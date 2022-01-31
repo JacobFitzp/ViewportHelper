@@ -1,9 +1,25 @@
 {
   "name": "@jacobfitzp/viewport-helper",
-  "version": "1.1.1",
-  "browser": "src/viewport-helper.js",
+  "version": "1.1.2",
+  "browser": "dist/viewport-helper.min.js",
   "description": "Set of useful tools for interacting with the viewport",
   "author": "Jacob Fitzpatrick <contact@jacobfitzp.co.uk>",
   "license": "MIT",
-  "keywords": ["viewport", "visible", "scroll", "helper", "tool", "useful", "position", "element in viewport"]
+  "keywords": [
+    "viewport",
+    "visible",
+    "scroll",
+    "helper",
+    "tool",
+    "useful",
+    "position",
+    "element in viewport"
+  ],
+  "devDependencies": {
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  }
 }

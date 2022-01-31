@@ -13,8 +13,6 @@ This library includes a comprehensive set of tools for detecting if elements are
 
 ### NPM
 
-This package can be installed using NPM:
-
 ```
 npm install @jacobfitzp/viewport-helper
 ```
@@ -27,7 +25,9 @@ require('@jacobfitzp/viewport-helper');
 
 ### CDN
 
-
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@jacobfitzp/viewport-helper@v1.1.2/dist/viewport-helper.min.js"></script>
+```
 
 ## Usage
 

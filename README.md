@@ -1,6 +1,7 @@
 <h1>Viewport Helper</h1>
 
-![npm (scoped)](https://img.shields.io/npm/v/@jacobfitzp/viewport-helper)
+<img src=https://img.shields.io/npm/v/@jacobfitzp/viewport-helper>
+<img src=https://img.shields.io/badge/dependancies-0-green>
 
 viewport-helper.js is a set of useful tools for interacting with the viewport.
 
@@ -10,13 +11,23 @@ This library includes a comprehensive set of tools for detecting if elements are
 
 ## Installation
 
+### NPM
+
 This package can be installed using NPM:
 
 ```
 npm install @jacobfitzp/viewport-helper
 ```
 
-Alteratively you can download or clone this repo and include the source code manually.
+Once installed, you can require the package using:
+
+```javascript
+require('@jacobfitzp/viewport-helper');
+```
+
+### CDN
+
+
 
 ## Usage
 

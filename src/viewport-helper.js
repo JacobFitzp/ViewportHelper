@@ -8,8 +8,10 @@ const ViewportHelper = {
 
     config: {
         viewportChangeEventTriggers: ['resize', 'scroll', 'orientationchange'],
-        viewportPositionOffset: 0,
+        viewportPositionOffset: 0
     },
+
+    listenersInit: false,
 
     listeners: {},
 
@@ -28,7 +30,7 @@ const ViewportHelper = {
 
         return {
             top: (window.scrollY - offsetAmount),
-            bottom: (window.scrollY + window.innerHeight + offsetAmount)
+            bottom: (window.scrollY + window.outerHeight + offsetAmount)
         };
     },
 
@@ -41,7 +43,7 @@ const ViewportHelper = {
     getElementPosition: function (element) {
         return {
             top: element.getBoundingClientRect().top + window.scrollY,
-            bottom: element.getBoundingClientRect().bottom
+            bottom: element.getBoundingClientRect().bottom + window.scrollY
         };
     },
 
@@ -90,9 +92,9 @@ const ViewportHelper = {
      * @param {number|null} offset
      */
     onElementInViewport: function (element, callback, offset = null, once = true) {
-        ViewportHelper.registerListener(element, callback, offset, once, function (listener) {
+        ViewportHelper.registerListener(element, callback, function (listener) {
             return ViewportHelper.isElementInViewport(listener.element, listener.offset);
-        });
+        }, offset, once);
     },
 
     /**
@@ -104,9 +106,9 @@ const ViewportHelper = {
      * @param {boolean} once
      */
     onElementNotInViewport: function (element, callback, offset = null, once = true) {
-        ViewportHelper.registerListener(element, callback, offset, once, function (listener) {
+        ViewportHelper.registerListener(element, callback, function (listener) {
             return !ViewportHelper.isElementInViewport(listener.element, listener.offset);
-        });
+        }, offset, once);
     },
 
     /**
@@ -118,7 +120,9 @@ const ViewportHelper = {
      * @param {boolean} once
      * @param {function} check
      */
-    registerListener: function (element, callback, offset, once, check) {
+    registerListener: function (element, callback, check, offset, once) {
+
+        ViewportHelper.initListeners();
 
         var listenersLength = Object.entries(ViewportHelper.listeners).length;
 
@@ -149,19 +153,41 @@ const ViewportHelper = {
     },
 
     /**
+     * Get percentage scroll progress
+     *
+     * @param {HTMLElement|null} container
+     */
+    getScrollProgress: function (container = null) {
+
+        if (container === null) {
+            container = document.body;
+        }
+
+        var viewportPosition = ViewportHelper.getViewportPosition(0),
+            containerHeight = container.offsetHeight;
+
+        return Math.floor((viewportPosition.bottom / containerHeight) * 100);
+    },
+
+    /**
      * Initialise listeners
      */
-    init: function () {
-        ViewportHelper.checkListeners();
+    initListeners: function () {
+
+        if (ViewportHelper.listenersInit) {
+            return;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            ViewportHelper.checkListeners();
+        }, false);
 
         ViewportHelper.onViewportChange(() => {
             ViewportHelper.checkListeners();
         });
+
+        ViewportHelper.listenersInit = true;
     }
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    ViewportHelper.init();
-}, false);
 
 window.ViewportHelper = ViewportHelper;

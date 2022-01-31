@@ -1,7 +1,9 @@
 {
   "name": "@jacobfitzp/viewport-helper",
-  "version": "1.1.0",
+  "version": "1.1.1",
+  "browser": "src/viewport-helper.js",
   "description": "Set of useful tools for interacting with the viewport",
   "author": "Jacob Fitzpatrick <contact@jacobfitzp.co.uk>",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": ["viewport", "visible", "scroll", "helper", "tool", "useful", "position", "element in viewport"]
 }

@@ -2,7 +2,11 @@
 
 ![npm (scoped)](https://img.shields.io/npm/v/@jacobfitzp/viewport-helper)
 
-viewport-helper.js is a set of useful tools for interacting with the viewport, mainly the ability to check if an element is in the viewport or not.
+viewport-helper.js is a set of useful tools for interacting with the viewport.
+
+This library includes a comprehensive set of tools for detecting if elements are in the viewport, including the ability to listen for specific elements coming in and out of the viewport. 
+
+<img src="https://i.ibb.co/S58rsmw/Group-1.png">
 
 ## Installation
 
@@ -18,13 +22,34 @@ Alteratively you can download or clone this repo and include the source code man
 
 ### isElementInViewport()
 
-This method is used to check if a specific element is currently in the viewport.
+Used to check if a specific element is currently in the viewport.
 
 #### Parameters:
 
-`element {HTMLElement}` : Target element, this is the element we will check is in the viewport.
-
-`offset {int|null} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>element</td>
+            <td>HTMLElement</td>
+            <td>Yes</td>
+            <td>Target element</td>
+        </tr>
+        <tr>
+            <td>offset</td>
+            <td>number | null</td>
+            <td>No</td>
+            <td>Viewport offset</td>
+        </tr>
+    </tbody>
+</table>
 
 #### Example Usage:
 
@@ -38,17 +63,46 @@ if (ViewportHelper.isElementInViewport(element)) {
 
 ### OnElementInViewport()
 
-This method is used to keep an eye on a given element and execute a callback function once it comes into the viewport.
+Used to keep an eye on a given element and execute a callback function once it comes into the viewport.
 
 #### Parameters:
 
-`element {HTMLElement}` : Target element, this is the element that will trigger the callback once it comes into the viewport.
-
-`callback {function}` : Callback function to be called once the element comes into the viewport.
-
-`offset {int|null} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
-
-`once {boolean}` : Only call the callback once if true, once the element comes into the viewport the listener will be removed and the callback won't be triggered again - Useful for one time actions such as image lazyloading.
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>element</td>
+            <td>HTMLElement</td>
+            <td>Yes</td>
+            <td>Target element</td>
+        </tr>
+        <tr>
+            <td>callback</td>
+            <td>function</td>
+            <td>Yes</td>
+            <td>Callback function</td>
+        </tr>
+        <tr>
+            <td>offset</td>
+            <td>number | null</td>
+            <td>No</td>
+            <td>Viewport offset</td>
+        </tr>
+        <tr>
+            <td>once</td>
+            <td>boolean</td>
+            <td>No</td>
+            <td>Fire event only once</td>
+        </tr>
+    </tbody>
+</table>
 
 #### Example usage:
 ```javascript
@@ -61,17 +115,46 @@ ViewportHelper.onElementInViewport(element, function () {
 
 ### onElementNotInViewport()
 
-This method does the oposite of `onElementInViewport`, it executes a callback function when a given element is not in the viewport.
+Does the oposite of `onElementInViewport`, it executes a callback function when a given element is not in the viewport.
 
 #### Parameters:
 
-`element {HTMLElement}` : Target element, this is the element that will trigger the callback once it comes out of the viewport.
-
-`callback {function}` : Callback function to be called once the element comes out of the viewport.
-
-`offset {int|null} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
-
-`once {boolean}` : Only call the callback once if true, once the element comes out of the viewport the listener will be removed and the callback won't be triggered again - Useful for one time actions.
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>element</td>
+            <td>HTMLElement</td>
+            <td>Yes</td>
+            <td>Target element</td>
+        </tr>
+        <tr>
+            <td>callback</td>
+            <td>function</td>
+            <td>Yes</td>
+            <td>Callback function</td>
+        </tr>
+        <tr>
+            <td>offset</td>
+            <td>number | null</td>
+            <td>No</td>
+            <td>Viewport offset</td>
+        </tr>
+        <tr>
+            <td>once</td>
+            <td>boolean</td>
+            <td>No</td>
+            <td>Fire event only once</td>
+        </tr>
+    </tbody>
+</table>
 
 #### Example usage:
 ```javascript
@@ -84,19 +167,52 @@ ViewportHelper.onElementNotInViewport(element, function () {
 
 ### registerListener()
 
-This method is used to register custom listener functions on viewport change.
+Used to register custom listener functions on viewport change.
 
 #### Parameters:
 
-`element {HTMLElement}` : Target element.
-
-`callback {function}` : Callback function.
-
-`offset {int|null} [optional]` : Offset the viewport by a given amount, if set this will override the viewportPositionOffset config.
-
-`once {boolean}` : Only call the callback once if true.
-
-`check {function}` : Listener function, is passed a listener object which contains the target element, offset etc... return true to trigger or return false to skip.
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>element</td>
+            <td>HTMLElement</td>
+            <td>Yes</td>
+            <td>Target element</td>
+        </tr>
+        <tr>
+            <td>callback</td>
+            <td>function</td>
+            <td>Yes</td>
+            <td>Callback function</td>
+        </tr>
+        <tr>
+            <td>check</td>
+            <td>function</td>
+            <td>Yes</td>
+            <td>Check function</td>
+        </tr>
+        <tr>
+            <td>offset</td>
+            <td>number | null</td>
+            <td>No</td>
+            <td>Viewport offset</td>
+        </tr>
+        <tr>
+            <td>once</td>
+            <td>boolean</td>
+            <td>No</td>
+            <td>Fire event only once</td>
+        </tr>
+    </tbody>
+</table>
 
 #### Example usage:
 ```javascript
@@ -104,18 +220,35 @@ let element = document.querySelector('.some-element');
 
 ViewportHelper.registerListener(element, function () {
     console.log('Custom listener function has been triggered > .some-element has come into the viewport');
-}, null, true, function (listener) {
-    return ViewportHelper.isElementInViewport(listener.element, listener.offset);
+}, function () {
+    return ViewportHelper.isElementInViewport(element);
 });
 ```
 
 ### onViewportChange()
 
-This method is used to execute a callback function when the viewport changes in any way, for example if the user scrolls, resizes their screen, or rotates their device.
+Used to execute a callback function when the viewport changes in any way, for example if the user scrolls, resizes their screen, or rotates their device.
 
 #### Parameters:
 
-`callback {function}` : Function to execute when the viewport changes.
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>callback</td>
+            <td>function</td>
+            <td>Yes</td>
+            <td>Callback function</td>
+        </tr>
+    </tbody>
+</table>
 
 #### Example Usage:
 
@@ -127,15 +260,32 @@ ViewportHelper.onViewportChange(function () {
 
 ### getViewportPosition()
 
-This method is used to get the top and bottom position of the viewport.
+Used to get the top and bottom position of the viewport.
 
 ### getElementPosition()
 
-This method is used to get the top and bottom position of a given element.
+Used to get the top and bottom position of a given element.
 
 #### Parameters:
 
-`element {HTMLElement}` : Element to get the position of
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>element</td>
+            <td>HTMLElement</td>
+            <td>Yes</td>
+            <td>Target element</td>
+        </tr>
+    </tbody>
+</table>
 
 ## Configuration
 

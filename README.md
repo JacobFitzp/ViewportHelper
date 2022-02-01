@@ -1,7 +1,6 @@
 <h1>Viewport Helper</h1>
 
-<img src=https://img.shields.io/npm/v/@jacobfitzp/viewport-helper>
-<img src=https://img.shields.io/badge/dependancies-0-green>
+<img src=https://img.shields.io/npm/v/@jacobfitzp/viewport-helper> <img src=https://img.shields.io/badge/dependancies-0-green>
 
 viewport-helper.js is a set of useful tools for interacting with the viewport.
 

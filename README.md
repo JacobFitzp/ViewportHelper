@@ -25,7 +25,7 @@ require('@jacobfitzp/viewport-helper');
 ### CDN
 
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@jacobfitzp/viewport-helper@v1.1.3/dist/viewport-helper.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@jacobfitzp/viewport-helper@v1.2.0/dist/viewport-helper.min.js"></script>
 ```
 
 ## Usage
@@ -310,3 +310,5 @@ An array of event types that are classed as viewport change, for example scroll,
 Offset the viewport position by a given amount, for example if you set the offset to 200px then elements within a 200px threshold of the viewport will be considered as being in the viewport.
 
 This is useful if you want to do something just **before** elements come into the viewport, in some cases increasing this value can offer better user experience.
+
+<img src="https://i.ibb.co/BPPf02f/Group-1.png">

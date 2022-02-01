@@ -11,8 +11,6 @@ const ViewportHelper = {
         viewportPositionOffset: 0
     },
 
-    listenersInit: false,
-
     listeners: {},
 
     /**
@@ -174,13 +172,7 @@ const ViewportHelper = {
      */
     initListeners: function () {
 
-        if (ViewportHelper.listenersInit) {
-            return;
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            ViewportHelper.checkListeners();
-        }, false);
+        ViewportHelper.checkListeners();
 
         ViewportHelper.onViewportChange(() => {
             ViewportHelper.checkListeners();
@@ -189,5 +181,9 @@ const ViewportHelper = {
         ViewportHelper.listenersInit = true;
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    ViewportHelper.initListeners();
+}, false);
 
 window.ViewportHelper = ViewportHelper;

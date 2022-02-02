@@ -84,7 +84,7 @@ const ViewportHelper = {
     /**
      * Register listener for when a given element comes into the viewport.
      *
-     * @param {HTMLElement} element
+     * @param {HTMLElement|NodeList} element
      * @param {function} callback
      * @param {boolean} once
      * @param {number|null} offset
@@ -98,7 +98,7 @@ const ViewportHelper = {
     /**
      * Register listener for when a given element comes out of the viewport.
      *
-     * @param {HTMLElement} element
+     * @param {HTMLElement|NodeList} element
      * @param {function} callback
      * @param {number|null} offset
      * @param {boolean} once
@@ -112,7 +112,7 @@ const ViewportHelper = {
     /**
      * Register listener function to be ran on viewport change.
      *
-     * @param {HTMLElement} element
+     * @param {HTMLElement|NodeList} element
      * @param {function} callback
      * @param {number|null} offset
      * @param {boolean} once
@@ -120,16 +120,15 @@ const ViewportHelper = {
      */
     registerListener: function (element, callback, check, offset, once) {
 
-        ViewportHelper.initListeners();
-
         var listenersLength = Object.entries(ViewportHelper.listeners).length;
 
-        ViewportHelper.listeners[listenersLength + 1] = {
-            element: element,
-            callback: callback,
-            once: once,
-            offset: offset,
-            check: check
+        if (element instanceof NodeList) {
+            element.forEach(function (subElement) {
+                listenersLength++;
+                ViewportHelper.listeners[listenersLength] = {element: subElement, callback: callback, once: once, offset: offset, check: check}
+            });
+        } else {
+            ViewportHelper.listeners[listenersLength + 1] = {element: element, callback: callback, once: once, offset: offset, check: check}
         }
     },
 
@@ -140,9 +139,7 @@ const ViewportHelper = {
     checkListeners: function () {
         for (const [listenerIndex, listener] of Object.entries(ViewportHelper.listeners)) {
             if (listener.check(listener)) {
-
-                listener.callback();
-
+                listener.callback(listener.element);
                 if (listener.once) {
                     delete ViewportHelper.listeners[listenerIndex];
                 }

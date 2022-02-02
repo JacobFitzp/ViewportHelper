@@ -25,7 +25,7 @@ require('@jacobfitzp/viewport-helper');
 ### CDN
 
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@jacobfitzp/viewport-helper@v1.2.0/dist/viewport-helper.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@jacobfitzp/viewport-helper@v1.2.1/dist/viewport-helper.min.js"></script>
 ```
 
 ## Usage
@@ -89,7 +89,7 @@ Used to keep an eye on a given element and execute a callback function once it c
     <tbody>
         <tr>
             <td>element</td>
-            <td>HTMLElement</td>
+            <td>HTMLElement | NodeList</td>
             <td>Yes</td>
             <td>Target element</td>
         </tr>
@@ -116,10 +116,17 @@ Used to keep an eye on a given element and execute a callback function once it c
 
 #### Example usage:
 ```javascript
-let element = document.querySelector('.some-element');
+let element = document.querySelector('.some-element'),
+    elements = document.querySelector('.some-element');
 
 ViewportHelper.onElementInViewport(element, function () {
     console.log('Element .some-name has come into the viewport');
+});
+
+<!-- A NodeList can also be passed -->
+ViewportHelper.onElementNotInViewport(elements, function (element) {
+    console.log('Element in viewport:');
+    console.log(element);
 });
 ```
 
@@ -141,7 +148,7 @@ Does the oposite of `onElementInViewport`, it executes a callback function when 
     <tbody>
         <tr>
             <td>element</td>
-            <td>HTMLElement</td>
+            <td>HTMLElement | NodeList</td>
             <td>Yes</td>
             <td>Target element</td>
         </tr>
@@ -168,10 +175,17 @@ Does the oposite of `onElementInViewport`, it executes a callback function when 
 
 #### Example usage:
 ```javascript
-let element = document.querySelector('.some-element');
+let element = document.querySelector('.some-element'),
+    elements = document.querySelector('.some-element');
 
 ViewportHelper.onElementNotInViewport(element, function () {
     console.log('Element .some-name is no longer in the viewport');
+});
+
+<!-- A NodeList can also be passed -->
+ViewportHelper.onElementNotInViewport(elements, function (element) {
+    console.log('Element not in viewport:');
+    console.log(element);
 });
 ```
 
@@ -193,7 +207,7 @@ Used to register custom listener functions on viewport change.
     <tbody>
         <tr>
             <td>element</td>
-            <td>HTMLElement</td>
+            <td>HTMLElement | NodeList</td>
             <td>Yes</td>
             <td>Target element</td>
         </tr>

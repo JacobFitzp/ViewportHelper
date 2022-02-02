@@ -1,6 +1,6 @@
 {
   "name": "@jacobfitzp/viewport-helper",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "browser": "dist/viewport-helper.min.js",
   "description": "Set of useful tools for interacting with the viewport",
   "author": "Jacob Fitzpatrick <contact@jacobfitzp.co.uk>",

@@ -123,7 +123,7 @@ ViewportHelper.onElementInViewport(element, function () {
     console.log('Element .some-name has come into the viewport');
 });
 
-<!-- A NodeList can also be passed -->
+/* A NodeList can also be passed */
 ViewportHelper.onElementNotInViewport(elements, function (element) {
     console.log('Element in viewport:');
     console.log(element);
@@ -182,7 +182,7 @@ ViewportHelper.onElementNotInViewport(element, function () {
     console.log('Element .some-name is no longer in the viewport');
 });
 
-<!-- A NodeList can also be passed -->
+/* A NodeList can also be passed */
 ViewportHelper.onElementNotInViewport(elements, function (element) {
     console.log('Element not in viewport:');
     console.log(element);
@@ -324,5 +324,7 @@ An array of event types that are classed as viewport change, for example scroll,
 Offset the viewport position by a given amount, for example if you set the offset to 200px then elements within a 200px threshold of the viewport will be considered as being in the viewport.
 
 This is useful if you want to do something just **before** elements come into the viewport, in some cases increasing this value can offer better user experience.
+
+The offset can also be set to a nagative value which will have the oposite effect.
 
 <img src="https://i.ibb.co/BPPf02f/Group-1.png">

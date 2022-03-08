@@ -10,6 +10,8 @@ const ViewportHelper = {
         viewportChangeEventTriggers: ['resize', 'scroll', 'orientationchange'],
         viewportPositionOffset: 0
     },
+    
+    prevWidth: 0,
 
     listeners: {},
 
@@ -73,7 +75,7 @@ const ViewportHelper = {
      */
     onViewportChange: function (callback) {
         ViewportHelper.config.viewportChangeEventTriggers.forEach((eventType) => {
-            document.addEventListener(eventType, () => {
+            window.addEventListener(eventType, () => {
                 callback();
             }, {
                 passive: true
@@ -170,12 +172,30 @@ const ViewportHelper = {
     initListeners: function () {
 
         ViewportHelper.checkListeners();
+        ViewportHelper.prevWidth = window.innerWidth;
 
         ViewportHelper.onViewportChange(() => {
             ViewportHelper.checkListeners();
         });
 
         ViewportHelper.listenersInit = true;
+    },
+
+    /**
+     * Register listener for change in the viewport width
+     * 
+     * @param {function} callback
+     */
+    onViewportWidthChange: function (callback)
+    {
+        ViewportHelper.onViewportChange(function () {
+            
+            if (window.innerWidth !== ViewportHelper.prevWidth) {
+                callback();
+            }
+
+            ViewportHelper.prevWidth = window.innerWidth;
+        });
     }
 }
 

@@ -1,3 +1,11 @@
+## v1.2.2
+
+### Additions
+- OnViewportWidthChange method - Similar to onViewportChange however it only fires when the width of the window changes, and ignores all other changes to the viewport.
+
+### Fixes
+- Fix issue with resize event listener, listeners are now added to window instead of document.
+
 ## v1.2.1
 
 ### Updates

@@ -25,7 +25,7 @@ require('@jacobfitzp/viewport-helper');
 ### CDN
 
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@jacobfitzp/viewport-helper@v1.2.1/dist/viewport-helper.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@jacobfitzp/viewport-helper@v1.2.2/dist/viewport-helper.min.js"></script>
 ```
 
 ## Usage
